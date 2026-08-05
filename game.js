@@ -15,7 +15,7 @@ const BASE_PROJECTILE_SPEED = 650;
 const PROJECTILE_LIFETIME = 1.55;
 const BASE_SLOW_FACTOR = 0.56;
 const BASE_SLOW_DURATION = 0.9;
-const CHECKPOINT_RADIUS = 64;
+const CHECKPOINT_RADIUS = 15;
 const CHECKPOINTS = [
   { x: 170, y: 380, label: "START" },
   { x: 540, y: 175, label: "1" },
