@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080a18">
+  <title>Neon Scramble Online</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="gameWrap">
+    <section id="stage" aria-label="Neon Scramble game">
+      <canvas id="canvas" width="1280" height="720">
+        Your browser must support HTML canvas to play Neon Scramble.
+      </canvas>
+
+      <div class="hud">
+        <aside class="leaderboard-panel" aria-label="Race standings">
+          <div class="panel-kicker">LIVE STANDINGS</div>
+          <div id="leaderboard" class="leaderboard"></div>
+        </aside>
+
+        <div class="center-info">
+          <div class="title">NEON SCRAMBLE</div>
+          <div id="status" class="status" aria-live="polite">Choose a mode</div>
+          <div id="roomBadge" class="room-badge hidden"></div>
+        </div>
+
+        <div class="player-console">
+          <div class="console-topline">
+            <span id="hudSkinName">Neon Scout</span>
+            <span id="hudCoins">150 coins</span>
+          </div>
+          <div class="console-meter">
+            <span>BOOST</span>
+            <div class="meter"><div id="boostMeter" class="meter-fill boost-fill"></div></div>
+          </div>
+          <div class="console-meter">
+            <span>SHOT</span>
+            <div class="meter"><div id="shotMeter" class="meter-fill shot-fill"></div></div>
+          </div>
+        </div>
+
+        <div id="countdown" class="countdown hidden" aria-live="assertive"></div>
+        <div id="toast" class="toast hidden" aria-live="polite"></div>
+
+        <div class="help">
+          <span class="desktop-help">Move: WASD / arrows · Shoot: F or click · Boost: Space · Local restart: R</span>
+          <span class="touch-help">Move left · Shoot and boost right · Follow the glowing checkpoint</span>
+        </div>
+
+        <div id="touchControls" class="touch-controls" aria-label="Touch game controls">
+          <div class="dpad">
+            <button class="touch-key up" type="button" data-control="up" aria-label="Move up">▲</button>
+            <button class="touch-key left" type="button" data-control="left" aria-label="Move left">◀</button>
+            <button class="touch-key down" type="button" data-control="down" aria-label="Move down">▼</button>
+            <button class="touch-key right" type="button" data-control="right" aria-label="Move right">▶</button>
+          </div>
+          <div class="action-pad">
+            <button class="touch-key action-button shoot-button" type="button" data-control="shoot" aria-label="Shoot">FIRE</button>
+            <button class="touch-key action-button boost-button" type="button" data-control="boost" aria-label="Use boost">BOOST</button>
+          </div>
+        </div>
+
+        <div id="overlay" class="overlay">
+          <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="modal-heading">
+              <div>
+                <p class="eyebrow">SIX-RACER ARCADE CHAOS</p>
+                <h1 id="modalTitle">NEON SCRAMBLE</h1>
+              </div>
+              <div id="wallet" class="wallet" aria-label="Coin balance">◉ 150</div>
+            </div>
+
+            <p id="modalText">
+              Race five bots locally or fill a private room with up to six friends.
+            </p>
+
+            <div id="menuPanel">
+              <label class="field-label" for="playerNameInput">PLAYER NAME</label>
+              <input id="playerNameInput" type="text" maxlength="20" autocomplete="nickname" value="Player One">
+
+              <div id="equippedSummary" class="equipped-summary">
+                Equipped: <strong id="equippedName">Neon Scout</strong>
+              </div>
+
+              <div id="modeControls" class="button-row">
+                <button id="localButton" type="button">6-RACER PRACTICE</button>
+                <button id="onlineButton" class="secondary" type="button">ONLINE ROOM</button>
+                <button id="shopButton" class="shop-button" type="button">SKIN SHOP</button>
+              </div>
+
+              <div id="onlinePanel" class="online-panel hidden">
+                <label class="field-label" for="roomInput">ROOM CODE</label>
+                <input id="roomInput" type="text" maxlength="8" autocapitalize="characters" spellcheck="false" placeholder="Leave blank to create a room">
+                <div id="joinControls" class="button-row">
+                  <button id="createRoomButton" type="button">CREATE ROOM</button>
+                  <button id="joinRoomButton" class="secondary" type="button">JOIN ROOM</button>
+                </div>
+              </div>
+
+              <div id="onlineControls" class="hidden">
+                <div class="button-row">
+                  <button id="readyButton" type="button">READY</button>
+                  <button id="copyButton" class="secondary" type="button">COPY ROOM CODE</button>
+                  <button id="lobbyShopButton" class="shop-button" type="button">CHANGE SKIN</button>
+                  <button id="disconnectButton" class="danger" type="button">LEAVE</button>
+                </div>
+              </div>
+
+              <div id="lobbyInfo" aria-live="polite"></div>
+            </div>
+
+            <section id="shopPanel" class="shop-panel hidden" aria-label="Skin shop">
+              <div class="shop-intro">
+                Unlock funny racers with coins earned from placement, checkpoints and projectile hits.
+                Perks are intentionally small and include trade-offs.
+              </div>
+              <div id="shopGrid" class="shop-grid"></div>
+              <button id="shopBackButton" class="secondary" type="button">BACK</button>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="game.js" defer></script>
+</body>
+</html>
